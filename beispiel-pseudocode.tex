@@ -1,0 +1,39 @@
+\documentclass{exercss}
+
+\usepackage[ngerman]{babel}
+\usepackage{dapzwei}
+
+\exerciseMeta{
+	sheet number=0,
+	%-----------------------------------------------------------
+	% ANPASSEN!
+	author=Anna Apfel, % EURE NAMEN (auf dem Deckblatt)...
+	author=Bert Birne, % ... und so weiter
+	authors short={Apfel, Birne}, % für die Kopfzeilen
+	%-----------------------------------------------------------
+}
+
+\algorithmus{\Algo}{Algo}
+\arrayVariable{\arr}{A}
+\variable{\summe}{s}
+\variable{\counteri}{i}
+\variable{\counterj}{j}
+\funktion{\len}{length}
+
+\begin{document}
+	Nur ein Beispiel für die Verwendung von \texttt{algorithm2e}.
+	\begin{pseudocode}[\Algo(Array \arr)]
+		\summe \assign 0\;
+		\For {\counteri \assign 1 \KwTo $\len[\arr]$ \label{OuterFor}} {
+			\If {$\arr[\counteri] \neq 0$ \label{If}} {
+				\For {\counterj \assign 1 \KwTo \counteri \label{InnerFor}} {
+					\summe \assign $\summe + \arr[\counteri]$\; \label{Addition}
+				}
+			}
+		}
+		\Return \summe\;
+	\end{pseudocode}
+	Referenziere Zeile~\ref{OuterFor}.
+\end{document}
+
+
