@@ -1,0 +1,74 @@
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{listings}
+\lstset{
+	language=Java,
+	basicstyle=\footnotesize,
+	showstringspaces=false
+}
+\RequirePackage[linesnumbered,vlined]{algorithm2e}
+
+\colorlet{todo-primary}{brown!70!red}
+\colorlet{todo-secondary}{yellow!20!white}
+\RequirePackage[%
+	ngerman,
+	bordercolor=todo-primary,
+	linecolor=todo-primary,
+	backgroundcolor=todo-secondary,
+]{todonotes}
+\newcommand{\Todo}[2][]{%
+	\todo[inline,#1]{\sffamily\scriptsize%
+		\textcolor{todo-primary}{TODO: #2}%
+	}%
+}
+
+\newcommand{\neuesToken}[2]{%
+	\newcommand{#1}{%
+		\ensuremath{#2}%
+	}%
+}
+\newcommand{\neuesTokenMitSpace}[2]{%
+	\newcommand{#1}{%
+		\ensuremath{#2}%
+		\xspace%
+	}%
+}
+\newcommand{\algorithmus}[2]{%
+	\neuesToken{#1}{\mathsf{#2}}%
+}
+\newcommand{\funktion}[2]{%
+	\neuesToken{#1}{\mathrm{#2}}%
+}
+\newcommand{\variable}[2]{%
+	\neuesTokenMitSpace{#1}{\mathit{#2}}%
+}
+\newcommand{\arrayVariable}[2]{%
+	\neuesTokenMitSpace{#1}{\mathit{#2}}%
+}
+\newcommand{\schluesselwort}[2]{%
+	\neuesTokenMitSpace{#1}{\KwSty{#2}}%
+}
+\schluesselwort{\band}{and}
+\schluesselwort{\bor}{or}
+\schluesselwort{\bnot}{not}
+
+\neuesTokenMitSpace{\assign}{\mathrel{\gets}}
+
+\NewEnviron{pseudocode}[1][]{%
+
+	\medskip%
+	\ifstrempty{#1}{}{#1\\}
+	\begin{algorithm}[H]
+		\DontPrintSemicolon%
+		\BODY
+	\end{algorithm}
+
+	\medskip\noindent%
+}
+
+\exerciseMeta{
+	course name={Datenstrukturen, Algorithmen und Programmierung~2}, % title
+	course name short={DAP2},
+	group={},
+}
+
