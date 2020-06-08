@@ -66,6 +66,30 @@
 	\medskip\noindent%
 }
 
+\RequirePackage{forest}
+\forestset{
+	Standardbaum/.style={
+		s sep=+2em,
+		l sep-=0.4em,
+		font=\normalsize,
+		draw,
+		circle,
+		inner sep=4pt,
+		minimum width=2.4em,
+	},
+}
+\newcommand{\Baum}[2][1]{%
+	\scalebox{#1}{%
+		\begin{forest}
+			for tree={
+				Standardbaum,
+				Baum/.try,
+			}
+			#2
+		\end{forest}
+	}%
+}
+
 \exerciseMeta{
 	course name={Datenstrukturen, Algorithmen und Programmierung~2}, % title
 	course name short={DAP2},
