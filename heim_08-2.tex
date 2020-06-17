@@ -3,6 +3,8 @@
 \usepackage[ngerman]{babel}
 \usepackage{dapzwei}
 
+\usetikzlibrary{chains}
+
 \exerciseMeta{
 	sheet number=8,
 	%-----------------------------------------------------------
@@ -27,4 +29,56 @@
 			\Todo{Verfassen!}
 		\end{subexercises}
 	\end{exercise}
+
+	Beispiel-Diagramm:
+	
+	\begin{tikzpicture}
+		\tikzset{
+			node distance=0.3cm,
+			auto,
+			block/.style={
+				rectangle,
+				draw,
+				minimum width=3em,
+			},
+			math/.style={
+				execute at begin node=$,
+				execute at end node=$,
+			},
+			rectangle connector/.style={
+				to path={
+					(\tikztostart) --
+					++(#1,0pt) \tikztonodes |- (\tikztotarget)
+				},
+				pos=0.5,
+			}
+		}
+
+		% ABWÄRTS:
+		\begin{scope}
+			[
+				start chain=going below,
+				every on chain/.style={join=by ->},
+				every node/.append style={on chain,block,math},
+			]
+			\node (f9) {f(9)};
+			\node (f8) {f(8)};
+			\node (f4) {f(4)};
+			\node (f2) {f(2)};
+			\node (f1) {f(1)};
+		\end{scope}
+
+		% KNOTEN DANEBEN:
+		\begin{scope}[every node/.style={block,math}]
+			\node (f3) [right=1cm of f4] {f(4)};
+		\end{scope}
+
+		% RECHTECKIGE KANTEN:
+		\draw [->] (f9) -| (f3);
+		\draw [rectangle connector=1.25cm,->] (f8) to (f2.10);
+		\draw [rectangle connector,->] (f4) to (f2.20);
+		\draw [->] (f3) |- (f2);
+		\draw [rectangle connector, ->] (f3) to (f1.350);
+		\draw [rectangle connector,->] (f2.340) to (f1.10);
+	\end{tikzpicture}
 \end{document}
