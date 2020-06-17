@@ -90,6 +90,44 @@
 	}%
 }
 
+\tikzset{
+	BBaumknoten/.style={
+		draw,
+		rectangle split,
+		rectangle split horizontal,
+		rectangle split ignore empty parts,
+	},
+	BBaumkante/.style={
+		draw,
+		->,
+	},
+	BBaum/.style={
+		every node/.style={BBaumknoten},
+		edge from parent/.style={BBaumkante},
+		s dist={40mm}{20mm},
+	},
+	s dist/.style 2 args={
+		level 1/.style={sibling distance=#1},
+		level 2/.style={sibling distance=#2},
+	}
+}
+
+\newcommand{\restoreNext}{\renewcommand{\NEXT}{\next@One}}
+\newcommand{\NEXT}{\next@One}
+\newcommand{\next@One}{\nodepart{two}\renewcommand{\NEXT}{\next@Two}}
+\newcommand{\next@Two}{\nodepart{three}\renewcommand{\NEXT}{\next@Three}}
+\newcommand{\next@Three}{\nodepart{four}}
+
+% \BBaum[Stil]{TikZ-Baumdefinition}
+\newcommand{\BBaum}[2][]{%
+	{%
+		\def\;{\NEXT\@ifnextchar\par\@gobble\relax}%
+		\begin{tikzpicture}[BBaum,#1]
+			#2
+		\end{tikzpicture}%
+	}%
+}
+
 \exerciseMeta{
 	course name={Datenstrukturen, Algorithmen und Programmierung~2}, % title
 	course name short={DAP2},
