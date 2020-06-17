@@ -1,0 +1,28 @@
+\documentclass{exercss}
+
+\usepackage[ngerman]{babel}
+\usepackage{dapzwei}
+
+\exerciseMeta{
+	sheet number=8,
+	%-----------------------------------------------------------
+	% ANPASSEN!
+	author=Anna Apfel, % EURE NAMEN (auf dem Deckblatt)...
+	author=Bert Birne, % ... und so weiter
+	authors short={Apfel, Birne}, % für die Kopfzeilen
+	%-----------------------------------------------------------
+}
+
+\begin{document}
+	\begin{exercise}[title={B-Bäume}]
+		\begin{center}
+			\BBaum{
+				\node {24 \; 96} 
+					child {node {8 \; 15}} 
+					child {node {43 \; 71 \; 84}}
+					child {node {120 \; 128}}
+				;
+			}
+		\end{center}
+	\end{exercise}
+\end{document}
