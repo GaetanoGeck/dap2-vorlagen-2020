@@ -1,5 +1,6 @@
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
+\RequirePackage{xstring}
 \RequirePackage{listings}
 \lstset{
 	language=Java,
@@ -126,6 +127,57 @@
 			#2
 		\end{tikzpicture}%
 	}%
+}
+
+% \DijkstraProtokoll{0}{Initialisierung}{column spec}{A & B & ...}{
+%    0/w,
+%    \infty/w,
+%    ...
+% }{(A,0)}
+\newcommand{\DijkstraProtokoll}[6]{%
+	\def\Distanzen{}%
+	\foreach \Distanz/\Farbe in {#5} {%
+		\gappto{\Distanzen}{& }%
+		\IfBeginWith{\Distanz}{.}{%
+			\gappto{\Distanzen}{\boldmath\bgroup}%
+			\StrBehind{\Distanz}{.}[\Distanz]%
+			\xappto{\Distanzen}{$\Distanz$}%
+			\gappto{\Distanzen}{\egroup}%
+		}{%
+			\xappto{\Distanzen}{$\Distanz$}%
+		}%
+	}%
+	\def\Farben{}%
+	\foreach \Distanz/\Farbe in {#5} {%
+		\xappto{\Farben}{& }%
+		\IfBeginWith{\Farbe}{.}{%
+			\gappto{\Farben}{\bfseries\bgroup}%
+			\StrBehind{\Farbe}{.}[\Farbe]%
+			\xappto{\Farben}{\Farbe}%
+			\gappto{\Farben}{\egroup}%
+		}{%
+			\xappto{\Farben}{\Farbe}%
+		}%
+	}%
+	\parbox{0.9\textwidth}{%
+		\textbf{Nach dem #1.~Durchlauf: #2}\\[0.5em]
+		\begin{tabular}{#3}
+			% Knotennamen:
+			& #4
+			\\[0.2cm] \hline\hline
+			% Distanzen:
+			d \Distanzen
+			\\
+			% Färbungen:
+			color \Farben
+			\\
+		\end{tabular}%
+		\\[0.3em]
+
+		PQ: #6
+	}%\parbox
+	
+	\medskip
 }
 
 \exerciseMeta{
